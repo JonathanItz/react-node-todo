@@ -1,8 +1,8 @@
 import React from 'react';
 import './sass/App.scss';
 
-import ToDoForm from './components/ToDoForm'
-
+import TodoForm from './components/TodoForm'
+import Todos from './components/Todos'
 
 class App extends React.Component {
 
@@ -11,7 +11,21 @@ class App extends React.Component {
 		this.formHandler = this.formHandler.bind(this)
 
 		this.state = {
-			hasToDo: true
+			hasToDo: true,
+			todos: [
+				{
+					id: 1,
+					todo: 'Make app'
+				},
+				{
+					id: 2,
+					todo: 'Cook'
+				},
+				{
+					id: 3,
+					todo: 'Go Shopping'
+				}
+			]
 		}
 	}
 
@@ -20,10 +34,10 @@ class App extends React.Component {
 		const newToDo = document.querySelector('#new-todo').value
 
 		if (newToDo === '') {
-			this.setState({ hasToDo: false })
+			if ( this.state.hasToDo === true ) this.setState({ hasToDo: false })
 			return
 		}
-		if (this.state.hasToDo === false) this.setState({ hasToDo: true })
+		if ( this.state.hasToDo === false ) this.setState({ hasToDo: true })
 
 		console.log('were good');
 	}
@@ -34,7 +48,8 @@ class App extends React.Component {
 				<div className="container header">
 					Header
         		</div>
-				<ToDoForm formHandler={this.formHandler} hasToDo={this.state.hasToDo} />
+				<TodoForm formHandler={this.formHandler} hasToDo={this.state.hasToDo} />
+				<Todos todos={ this.state.todos } />
 			</div>
 		)
 	}
