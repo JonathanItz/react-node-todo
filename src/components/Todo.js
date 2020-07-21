@@ -1,7 +1,9 @@
 import React from 'react'
 
-const Todo = ( { todo } ) => {
-    return <li>{ todo }</li>
+import Delete from '../images/delete.svg'
+
+const Todo = ( { todo, id, deleteTodo } ) => {
+    return <li className="todo">{ todo }<img data-todo-id={ id } className="delete" src={ Delete } onClick={ deleteTodo } /></li>
 }
 
 export default Todo

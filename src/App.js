@@ -8,7 +8,8 @@ class App extends React.Component {
 
 	constructor( props ) {
 		super( props )
-		this.todoFormHandler = this.todoFormHandler.bind(this)
+		this.todoFormHandler = this.todoFormHandler.bind( this )
+		this.deleteTodo 	 = this.deleteTodo.bind( this )
 
 		this.state = {
 			hasToDo: true,
@@ -44,8 +45,14 @@ class App extends React.Component {
 		if ( this.state.hasToDo === false ) this.setState({ hasToDo: true })
 
 		this.setState( ( prevState ) => {
-			return prevState.todos.push( { id: 100, todo: newToDo } )
+			const nextId = ++prevState.todos.length
+
+			return prevState.todos.push( { id: nextId , todo: newToDo } )
 		})
+	}
+
+	deleteTodo( e ) {
+		const idToRemove = e.currentTarget.getAttribute('data-todo-id')
 	}
 
 	render() {
@@ -55,7 +62,7 @@ class App extends React.Component {
 					Header
         		</div>
 				<TodoForm formHandler={ this.todoFormHandler } hasToDo={ this.state.hasToDo } />
-				<Todos todos={ this.state.todos } />
+				<Todos todos={ this.state.todos } deleteTodo={ this.deleteTodo } />
 			</div>
 		)
 	}
