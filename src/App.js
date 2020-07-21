@@ -6,9 +6,9 @@ import Todos from './components/Todos'
 
 class App extends React.Component {
 
-	constructor(props) {
-		super(props)
-		this.formHandler = this.formHandler.bind(this)
+	constructor( props ) {
+		super( props )
+		this.todoFormHandler = this.todoFormHandler.bind(this)
 
 		this.state = {
 			hasToDo: true,
@@ -24,12 +24,16 @@ class App extends React.Component {
 				{
 					id: 3,
 					todo: 'Go Shopping'
+				},
+				{
+					id: 4,
+					todo: 'Eat food'
 				}
 			]
 		}
 	}
 
-	formHandler(e) {
+	todoFormHandler( e ) {
 		e.preventDefault()
 		const newToDo = document.querySelector('#new-todo').value
 
@@ -39,7 +43,9 @@ class App extends React.Component {
 		}
 		if ( this.state.hasToDo === false ) this.setState({ hasToDo: true })
 
-		console.log('were good');
+		this.setState( ( prevState ) => {
+			return prevState.todos.push( { id: 100, todo: newToDo } )
+		})
 	}
 
 	render() {
@@ -48,7 +54,7 @@ class App extends React.Component {
 				<div className="container header">
 					Header
         		</div>
-				<TodoForm formHandler={this.formHandler} hasToDo={this.state.hasToDo} />
+				<TodoForm formHandler={ this.todoFormHandler } hasToDo={ this.state.hasToDo } />
 				<Todos todos={ this.state.todos } />
 			</div>
 		)

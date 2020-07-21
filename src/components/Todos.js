@@ -1,15 +1,18 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 import Todo from './Todo'
 
-const Todos = ( props ) => {
-    const { todos } = props
-    
-    return (
-        <ul className="container">
-            { todos.map( todo => <Todo key={ todo.id } todo={ todo.todo } /> ) }
-        </ul>
-    )
-}
+export default class Todos extends React.Component {
+    render() {        
+        const { todos } = this.props
+        console.log(todos);
+        
 
-export default Todos
+        return (
+            <ul className="container">
+                { todos.map( todo => <Todo key={ todo.id } todo={ todo.todo } /> ) }
+            </ul>
+        )
+    }
+}
