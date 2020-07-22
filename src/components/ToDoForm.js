@@ -7,10 +7,10 @@ const TodoForm = ( props ) => {
     return (
         <div className="container todo-container">
             <form onSubmit={ formHandler }>
-                <input type="text" placeholder="todo" id="new-todo" />
+                <input className="columns 12" type="text" placeholder="todo" id="new-todo" />
                 <div className="error">{ ! hasToDo ? `Please enter a valid item` : null }</div>
                 <div className="row">
-                    <button>Submit</button>
+                    <button className="columns 12">Submit</button>
                 </div>
             </form>
         </div>

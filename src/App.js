@@ -1,6 +1,7 @@
 import React from 'react';
 import './sass/App.scss';
 
+import Header from './components/Header'
 import TodoForm from './components/TodoForm'
 import Todos from './components/Todos'
 
@@ -25,10 +26,6 @@ class App extends React.Component {
 				{
 					id: 3,
 					todo: 'Go Shopping'
-				},
-				{
-					id: 4,
-					todo: 'Eat food'
 				}
 			]
 		}
@@ -45,22 +42,29 @@ class App extends React.Component {
 		if ( this.state.hasToDo === false ) this.setState({ hasToDo: true })
 
 		this.setState( ( prevState ) => {
-			const nextId = ++prevState.todos.length
-
+			const lastIndex = prevState.todos.length - 1,
+				  nextId = prevState.todos[ lastIndex ].id + 1
+			
+			document.querySelector('#new-todo').value = ''
 			return prevState.todos.push( { id: nextId , todo: newToDo } )
 		})
 	}
 
 	deleteTodo( e ) {
 		const idToRemove = e.currentTarget.getAttribute('data-todo-id')
+		
+		const todoToRemove = ( { id } ) => id === idToRemove
+		
+		this.setState( prevState => {
+			const removeMe = prevState.todos.findIndex( todoToRemove )
+			return prevState.todos.splice( removeMe, 1 )
+		})
 	}
 
 	render() {
 		return (
 			<div>
-				<div className="container header">
-					Header
-        		</div>
+				<Header />
 				<TodoForm formHandler={ this.todoFormHandler } hasToDo={ this.state.hasToDo } />
 				<Todos todos={ this.state.todos } deleteTodo={ this.deleteTodo } />
 			</div>

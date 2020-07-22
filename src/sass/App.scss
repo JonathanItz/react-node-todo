@@ -2,6 +2,21 @@
 @import './grid';
 @import './variables';
 
+.header {
+    text-align: center;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    color: $black;
+    background-color: $gray;
+    margin-bottom: 2rem;
+
+    h1 {
+        font-size: 3rem;
+        margin: 0;
+    }
+}
+
 .error {
     position: relative;
     top: -1.6rem;
